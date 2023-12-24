@@ -2,13 +2,13 @@
   hosts: redis
   tasks:
     - name : installing redis repo file as a rpm
-      ansible.builtin.get_url:
-        url : https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+      ansible.builtin.command:
+        cmd: "https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y"
 
-    - name: Enable service httpd, and not touch the state
-      ansible.builtin.service:
-        name: redis:remi-6.2
-        enabled: yes
+
+    - name : enabling the redis:remi-6.2 package 
+      ansible.builtin.command :
+        cmd: "dnf module enable redis:remi-6.2 -y"
 
     - name: Install ntpdate
       ansible.builtin.package:
