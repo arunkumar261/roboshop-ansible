@@ -69,7 +69,7 @@
       register : product_count    #storing the list of or output of catalogue.service file products in product_count variable
 
     - name : print the list of products stored in product_count variable
-      ansible.builtin.command:
+      ansible.builtin.debug:
         msg : "products lsit is : {{product_count}}"
 
     - name : loading the data to the catalogue
