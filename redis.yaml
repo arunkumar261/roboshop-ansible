@@ -1,5 +1,6 @@
 - name : redis
   hosts: redis
+  become: yes
   tasks:
     - name : installing redis repo file as a rpm
       ansible.builtin.command:
