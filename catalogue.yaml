@@ -70,7 +70,7 @@
 
     - name : print the list of products stored in product_count variable
       ansible.builtin.debug:
-        msg : "products lsit is : {{product_count}}"
+        msg : "products lsit is : {{product_count.stdout}}"
 
     - name : loading the data to the catalogue
       ansible.builtin.command : mongo --host mongodb-arundev.online < /app/schema/catalogue.service
