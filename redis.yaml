@@ -3,7 +3,7 @@
   tasks:
     - name : installing redis repo file as a rpm
       ansible.builtin.command:
-        cmd: "https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y"
+        cmd: "dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y"
 
 
     - name : enabling the redis:remi-6.2 package 
