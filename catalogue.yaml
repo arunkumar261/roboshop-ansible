@@ -66,7 +66,7 @@
 
     - name : get the categories/products count present in catalogue.service file
       ansible.builtin.command:
-        register : product_count    #storing the list of or output of catalogue.service file products in product_count variable
+      register : product_count    #storing the list of or output of catalogue.service file products in product_count variable
 
     - name : print the list of products stored in product_count variable
       ansible.builtin.command:
