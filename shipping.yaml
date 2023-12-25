@@ -29,8 +29,8 @@
 
     - name : cleaning the package
       ansible.builtin.command:  mvn clean package
-      # args :
-      #   chdir : /app
+      args :
+        chdir : /app
 
     - name : changing the name 
       ansible.builtin.command: mv /app/target/shipping-1.0.jar /app/shipping.jar
