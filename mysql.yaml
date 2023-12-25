@@ -1,0 +1,38 @@
+- name: mysql
+  hosts: mysql
+  become: yes
+  tasks:
+    - name: CentOS-8 Comes with MySQL 8 Version by default,appl'n want MySQL 5.7. So disable MySQL 8 version.
+      ansible.builtin.command: dnf module disable mysql -y
+
+    - name: Setup the MySQL5.7 repo file
+      ansible.builtin.copy:
+        src: mysql.repo
+        dest: /etc/yum.repos.d/mysql.repo
+
+    - name : install mysql community server
+      ansible.builtin.command: dnf install mysql-community-server -y
+
+    - name : enable and start the mysql
+      ansible.builtin.systemd_service:
+        state: started
+        enabled: true
+
+
+    - name: Run mysql_secure_installation
+      ansible.builtin.expect:
+        command: mysql_secure_installation
+        responses:
+          - "Enter current password for root (enter for none):" : "\r"
+          - "Set root password?" : "y\r"
+          - "New password:" : "RoboShop@1\r"
+          - "Re-enter new password:" : "RoboShop@1\r"
+          - "Remove anonymous users?" : "y\r"
+          - "Disallow root login remotely?" : "n\r"
+          - "Remove test database and access to it?" : "n\r"
+          - "Reload privilege tables now?" : "y\r"
+
+
+      - name : check whether u r able to login or not
+        anisble.builtin.command: mysql -uroot -pRoboShop@1
+     
