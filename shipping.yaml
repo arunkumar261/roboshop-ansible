@@ -1,0 +1,64 @@
+- name : shipping
+  hosts : shipping
+  become : yes
+  tasks: 
+    - name: Install maven
+      ansible.builtin.package:
+        name: maven
+        state: present
+
+    - name : creating user roboshop
+      ansible.builtin.user:
+        name : roboshop
+
+    - name : creating app directory
+      ansible.builtin.file:
+        path : /app
+        state: directory
+
+    - name : downloading the application code of catalogue
+      ansible.builtin.get_url:
+        url: https://roboshop-builds.s3.amazonaws.com/shipping.zip
+        dest: /tmp
+
+    - name : unzipping the catalogue.js file
+      ansible.builtin.unarchive:
+        src: /tmp/shipping.zip 
+        dest: /app
+        remote_src: yes
+
+    - name : cleaning the package
+      ansible.builtin.command:  mvn clean package
+      args :
+        chdir : /app
+
+    - name : changing the name 
+      ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
+
+
+    - name: copying the roboshop.conf file
+      ansible.builtin.copy:
+        src : shipping.service
+        dest: /etc/systemd/system/shipping.service
+
+    - name : deamon reload and start
+      ansible.builtin.systemd_service:
+        name : shipping
+        enabled : yes
+        state: started
+        daemon_reload: true
+
+    - name : installing mysql 
+      ansible.builtin.package:
+        name: mysql
+        state: present
+
+    - name : loading the data to the catalogue
+      ansible.builtin.command:     
+       cmd : "mysql -h mysql.arundev.online -uroot -pRoboShop@1 < /app/schema/shipping.sql"
+      when : product_count.stdout == 0
+
+    - name : restart
+      ansible.builtin.systemd_service:
+        name : shipping
+        state: restarted
