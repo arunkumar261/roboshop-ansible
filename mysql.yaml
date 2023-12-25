@@ -18,6 +18,9 @@
         name : mysqld
         enabled: yes
         state: started
+
+    - name : installing python pexpect module for running mysql_secure_installation
+      ansible.builtin.command: sudo dnf install -y python3-pexpect
         
 
     # - name : setting the password
