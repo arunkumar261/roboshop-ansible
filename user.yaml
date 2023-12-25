@@ -37,7 +37,8 @@
         remote_src: yes
 
     - name : installing npm dependecies
-      ansible.builtin.command:  npm install
+      ansible.builtin.command:  
+        cmd: npm install
       args :
         chdir : /app
 
@@ -68,7 +69,8 @@
 
 
     - name : get the users count present in user.service file
-      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
+      ansible.builtin.command:  
+        cmd: "mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'"
       register : user_count    #storing the list of or output of catalogue.service file users in user_count variable
 
     - name : print the list of users stored in user_count variable
