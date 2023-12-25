@@ -28,7 +28,7 @@
     - name : downloading the application code of user
       ansible.builtin.get_url:
         url: https://roboshop-builds.s3.amazonaws.com/user.zip
-        dest: /tmp/user.zip
+        dest: /tmp
 
     - name : unzipping the user.js file
       ansible.builtin.unarchive:
@@ -68,7 +68,7 @@
 
 
     - name : get the categories/products count present in user.service file
-      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
+      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.products.count()'
       register : user_count    #storing the list of or output of catalogue.service file products in product_count variable
 
     - name : print the list of products stored in user_count variable
