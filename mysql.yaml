@@ -28,14 +28,14 @@
       ansible.builtin.expect:
         command: mysql_secure_installation
         responses:
-          - "Enter current password for root (enter for none):" : "\r"
-          - "Set root password?" : "y\r"
-          - "New password:" : "RoboShop@1\r"
-          - "Re-enter new password:" : "RoboShop@1\r"
-          - "Remove anonymous users?" : "y\r"
-          - "Disallow root login remotely?" : "n\r"
-          - "Remove test database and access to it?" : "n\r"
-          - "Reload privilege tables now?" : "y\r"
+          "Enter current password for root (enter for none):" : "\r"
+          "Set root password?" : "y\r"
+          "New password:" : "RoboShop@1\r"
+          "Re-enter new password:" : "RoboShop@1\r"
+          "Remove anonymous users?" : "y\r"
+          "Disallow root login remotely?" : "n\r"
+          "Remove test database and access to it?" : "n\r"
+          "Reload privilege tables now?" : "y\r"
 
 
     - name: check whether u r able to login or not
