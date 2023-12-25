@@ -29,7 +29,7 @@
 
     - name: Run mysql_secure_installation
       ansible.builtin.expect:
-        command: mysql_secure_installation
+        command: mysql_secure_installation --set-root-pass=RoboShop@1
         responses:
           "Enter current password for root (enter for none):" : "\r"
           "Set root password?" : "y\r"
