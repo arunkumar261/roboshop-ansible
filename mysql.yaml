@@ -42,5 +42,6 @@
 
 
     - name: check whether u r able to login or not
-      ansible.builtin.command: mysql -uroot -pRoboShop@1
+      ansible.builtin.command: 
+        cmd: mysql -uroot -pRoboShop@1
      
