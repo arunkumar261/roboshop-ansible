@@ -56,7 +56,7 @@
     - name : loading the data to the catalogue
       ansible.builtin.command:     
        cmd : "mysql -h mysql.arundev.online -uroot -pRoboShop@1 < /app/schema/shipping.sql"
-      when : product_count.stdout == 0
+      #when : product_count.stdout == 0
 
     - name : restart
       ansible.builtin.systemd_service:
