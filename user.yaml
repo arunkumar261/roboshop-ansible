@@ -57,7 +57,7 @@
 
 
     - name :  setup MongoDB repo 
-      ansible.builtin.copy:
+      ansible.builtin.copy:count
         src : mongodb.repo
         dest: /etc/yum.repos.d/mongodb.repo
 
@@ -68,7 +68,7 @@
 
 
     - name : get the users count present in user.service file
-      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.user_count()'
+      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.users.count()'
       register : user_count    #storing the list of or output of catalogue.service file users in user_count variable
 
     - name : print the list of users stored in user_count variable
