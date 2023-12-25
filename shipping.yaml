@@ -31,6 +31,11 @@
       ansible.builtin.command:  mvn clean package
       args :
         chdir : /app
+      register: mvn_result
+
+    - name: Debug Maven Result
+      ansible.builtin.debug:
+        var: mvn_result
 
     - name : changing the name 
       ansible.builtin.command: mv /app/target/shipping-1.0.jar /app/shipping.jar
