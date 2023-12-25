@@ -77,7 +77,7 @@
     - name : loading the data to the catalogue
       ansible.builtin.command: mongo --host mongodb.arundev.online < /app/schema/catalogue.js      # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
        # cmd : "mongo --host mongodb.arundev.online < /app/schema/catalogue.js"
-      #when : product_count.stdout == 0      #basically in terminal stdout shows the no of products present
+      when : product_count.stdout == 0      #basically in terminal stdout shows the no of products present
 
     - name : restart and enable
       ansible.builtin.service:
