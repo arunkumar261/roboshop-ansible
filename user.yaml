@@ -67,18 +67,18 @@
         state: present
 
 
-    - name : get the categories/products count present in user.service file
-      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.products.count()'
-      register : user_count    #storing the list of or output of catalogue.service file products in product_count variable
+    - name : get the users count present in user.service file
+      ansible.builtin.command:  mongo --host mongodb.arundev.online --quiet --eval 'db = db.getSiblingDB("users"); db.user_count()'
+      register : user_count    #storing the list of or output of catalogue.service file users in user_count variable
 
-    - name : print the list of products stored in user_count variable
+    - name : print the list of users stored in user_count variable
       ansible.builtin.debug:
         msg : "users list is : {{user_count}}"
 
     - name : loading the data to the user
       ansible.builtin.command:         # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
         cmd : "mongo --host mongodb.arundev.online < /app/schema/user.js"
-      when : user_count.stdout == 0      #basically in terminal stdout shows the no of products present
+      when : user_count.stdout == 0      #basically in terminal stdout shows the no of users present
 
     - name : restart and enable
       ansible.builtin.service:
