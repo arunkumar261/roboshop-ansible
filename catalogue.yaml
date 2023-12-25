@@ -32,7 +32,7 @@
     - name : downloading the application code of catalogue
       ansible.builtin.get_url:
         url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-        dest: /tmp/catalogue.zip
+        dest: /tmp
 
     - name : unzipping the catalogue.js file
       ansible.builtin.unarchive:
@@ -77,13 +77,13 @@
     - name : loading the data to the catalogue
       ansible.builtin.command: mongo --host mongodb.arundev.online < /app/schema/catalogue.js      # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
        # cmd : "mongo --host mongodb.arundev.online < /app/schema/catalogue.js"
-      # when : product_count.stdout == 0      #basically in terminal stdout shows the no of products present
+      #when : product_count.stdout == 0      #basically in terminal stdout shows the no of products present
 
-    # - name : restart and enable
-    #   ansible.builtin.service:
-    #     name : catalogue
-    #     state : restarted
-    #     enabled : yes
+    - name : restart and enable
+      ansible.builtin.service:
+        name : catalogue
+        state : restarted
+        enabled : yes
 
       
 
