@@ -48,7 +48,7 @@
     - name : setting up systemd cart service
       ansible.builtin.copy:
         src : cart.service
-        path : /etc/systemd/system/cart.service
+        dest : /etc/systemd/system/cart.service
 
     - name : deamon reload and enable and start the cart
       ansible.builtin.systemd_service:
