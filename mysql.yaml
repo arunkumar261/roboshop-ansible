@@ -33,6 +33,6 @@
           - "Reload privilege tables now?" : "y\r"
 
 
-    - name : check whether u r able to login or not
-      anisble.builtin.command: mysql -uroot -pRoboShop@1
+    - name: check whether u r able to login or not
+      anisble.builtin.shell: mysql -uroot -pRoboShop@1
      
