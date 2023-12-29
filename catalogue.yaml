@@ -23,6 +23,11 @@
     - name : creating user roboshop
       ansible.builtin.user:
           name : roboshop
+
+    - name : recursively remove app directory if its present
+      ansible.builtin.file:
+        path : /app
+        state : absent
     
     - name : creating app directory
       ansible.builtin.file:
@@ -77,7 +82,7 @@
     - name : loading the data to the catalogue
       ansible.builtin.command:      # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
        cmd : "mongo --host mongodb.arundev.online < /app/schema/catalogue.js"
-      when : product_count.stdout == 0      #basically in terminal stdout shows the no of products present
+      when : product_count.stdout == "0"      #basically in terminal stdout shows the no of products present
 
     - name : restart and enable
       ansible.builtin.service:

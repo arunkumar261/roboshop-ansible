@@ -11,6 +11,11 @@
       ansible.builtin.user:
         name : roboshop
 
+    - name : recursively remove app directory if its present
+      ansible.builtin.file:
+        path : /app
+        state : absent
+
     - name : creating app directory
       ansible.builtin.file:
         path : /app
@@ -62,7 +67,7 @@
     - name : get the cities count present in city.service file
       ansible.builtin.command:  mysql -h mysql.arundev.online --quiet --eval 'db = db.getSiblingDB("cities"); db.cities.count()'
       register : city_count    
-      
+
     - name : print the list of cities stored in city_count variable
       ansible.builtin.debug:
         msg : "cities list is : {{city_count}}"
