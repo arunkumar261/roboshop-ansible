@@ -50,7 +50,7 @@
         chdir : /app
 
 
-    - name: copying the shiioing service file
+    - name: copying the shipping service file
       ansible.builtin.copy:
         src : shipping.service
         dest: /etc/systemd/system/shipping.service
@@ -74,7 +74,7 @@
 
 
 
-    - name : check the cities count present inshipping 
+    - name : check the cities count present in shipping 
       ansible.builtin.command:  mysql -h mysql.arundev.online -uroot -p{{mysql_password}} -SN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='cities'"
       register : schema
 
@@ -83,7 +83,7 @@
     #   ansible.builtin.debug:
     #     msg : "cities list is : {{schema}}"
 
-    - name : loading the data to the catalogue
+    - name : loading the data to the shipping
       ansible.builtin.shell: "mysql -h mysql.arundev.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql"
       when : schema.stdout != "1"
 
