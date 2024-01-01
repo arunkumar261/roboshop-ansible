@@ -1,4 +1,4 @@
-- name : web
+- name : web module
   hosts: web
   become: yes
   tasks:
@@ -14,10 +14,16 @@
         enabled : yes
 
 
-    - name: Remove file (delete file)
+    - name: Remove html directory if present
       ansible.builtin.file:
-        path: /usr/share/nginx/html/*
+        path: /usr/share/nginx/html
         state: absent
+
+
+    - name : create html directory
+      ansible.builtin.file:
+        path: /usr/share/nginx/html
+        state: directory
 
     - name : downloading the application code of user
       ansible.builtin.get_url:
@@ -25,7 +31,7 @@
         dest: /tmp
 
 
-    - name : unzipping the user.js file
+    - name : unzipping the user application
       ansible.builtin.unarchive:
         src: /tmp/web.zip
         dest: /usr/share/nginx/html

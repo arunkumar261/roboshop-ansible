@@ -1,4 +1,4 @@
-- name: mysql
+- name: mysql module
   hosts: mysql
   become: yes
   tasks:
@@ -15,7 +15,7 @@
         name: mysql-community-server
         state: present
 
-    - name : enable and start the mysql
+    - name : start and enable the mysql
       ansible.builtin.service:
         name : mysqld
         state: started

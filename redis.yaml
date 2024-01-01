@@ -2,15 +2,15 @@
   hosts: redis
   become : yes
   tasks:
-    - name : installing redis repo file as a rpm
-      ansible.builtin.command:
-        cmd: "dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y"
+    # - name : installing remi release
+    #   ansible.builtin.command:
+    #     cmd: "dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y"
 
-    # - name : install remi release
-    #   ansible.builtin.dnf:
-    #     name : https://rpms.remirepo.net/enterprise/remi-release-8.rpm
-    #     state : present
-    #     disable_gpg_check: true
+    - name : install remi release
+      ansible.builtin.dnf:
+        name : https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+        state : present
+        disable_gpg_check: true
 
 
     - name : enabling the redis:remi-6.2 package 
@@ -22,9 +22,9 @@
         name: redis
         state: present
 
-    - name: Replace old hostname with new hostname
+    - name: Replace old hostname with new hostname allow remote connections
       ansible.builtin.replace:
-        path: /etc/redis.conf
+        path: /etc/redis/redis.conf
         regexp: '127.0.0.1'
         replace: '0.0.0.0'
 

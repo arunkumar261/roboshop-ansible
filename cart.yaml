@@ -1,4 +1,4 @@
-- name : cart
+- name : cart module
   hosts : cart
   become : yes
   tasks:
@@ -35,7 +35,7 @@
         path : /app
         state: directory
 
-    - name : downloading the application code zip file 
+    - name : downloading the cart application
       ansible.builtin.get_url:
         url : https://roboshop-builds.s3.amazonaws.com/cart.zip
         dest : /tmp
@@ -63,7 +63,7 @@
       ansible.builtin.systemd_service:
         daemon_reload: true
 
-    - name : enable and start the cart
+    - name : start and enable the cart
       ansible.builtin.service:
         name : cart
         state: restarted

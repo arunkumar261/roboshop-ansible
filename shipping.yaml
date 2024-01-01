@@ -1,4 +1,4 @@
-- name : shipping
+- name : shipping module
   hosts : shipping
   become : yes
   vars:
@@ -23,12 +23,12 @@
         path : /app
         state: directory
 
-    - name : downloading the application code of catalogue
+    - name : downloading the application code for shipping
       ansible.builtin.get_url:
         url: https://roboshop-builds.s3.amazonaws.com/shipping.zip
         dest: /tmp
 
-    - name : unzipping the catalogue.js file
+    - name : unzipping/extract the shipping zip file
       ansible.builtin.unarchive:
         src: /tmp/shipping.zip 
         dest: /app
@@ -58,11 +58,11 @@
     - name : deamon reload and start
       ansible.builtin.systemd_service:
         name : shipping
-        enabled : yes
         state: started
+        enabled : yes
         daemon_reload: true
 
-    - name : installing mysql 
+    - name : installing mysql client
       ansible.builtin.package:
         name: mysql
         state: present
@@ -83,7 +83,7 @@
     #   ansible.builtin.debug:
     #     msg : "cities list is : {{schema}}"
 
-    - name : loading the data to the shipping
+    - name : loading the cities data
       ansible.builtin.shell: "mysql -h mysql.arundev.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql"
       when : schema.stdout != "1"
 

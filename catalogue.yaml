@@ -50,7 +50,7 @@
       args :
         chdir : /app
 
-    - name: setting up systemd that is catalogue service
+    - name: copy catalogue service
       ansible.builtin.copy:
         src : catalogue.service
         dest: /etc/systemd/system/catalogue.service
@@ -61,7 +61,7 @@
         state: started
         daemon_reload: true
 
-    - name :  setup MongoDB repo 
+    - name :  copying MongoDB repo 
       ansible.builtin.copy:
         src : mongodb.repo
         dest: /etc/yum.repos.d/mongodb.repo

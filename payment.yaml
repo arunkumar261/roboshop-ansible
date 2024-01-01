@@ -30,7 +30,7 @@
       url: https://roboshop-builds.s3.amazonaws.com/payment.zip
       dest: /tmp
 
-  - name : unzipping the payment application
+  - name : unzipping/extract the payment application
     ansible.builtin.unarchive:
       src: /tmp/payment.zip 
       dest: /app
