@@ -79,9 +79,9 @@
       register : schema
 
 
-    - name : print output
-      ansible.builtin.debug:
-        msg : "cities list is : {{schema}}"
+    # - name : print output
+    #   ansible.builtin.debug:
+    #     msg : "cities list is : {{schema}}"
 
     - name : loading the data to the catalogue
       ansible.builtin.shell: "mysql -h mysql.arundev.online -uroot -p{{mysql_password}} < /app/schema/shipping.sql"
