@@ -10,6 +10,10 @@
       ansible.builtin.command :
         cmd: "dnf module enable nodejs:18 -y"
 
+    # - name : disabling the previous nodejs package and enabling the new nodejs package 
+    #   ansible.builtin.shell :
+    #     cmd: dnf module disable nodejs -y; dnf module enable nodejs:18 -y 
+
     - name : Install node js package
       ansible.builtin.package:
         name : nodejs
@@ -35,21 +39,20 @@
         url: https://roboshop-builds.s3.amazonaws.com/user.zip
         dest: /tmp
 
-    - name : unzipping the user.js file
+    - name : unzipping/extract the user applliv=cation
       ansible.builtin.unarchive:
         src: /tmp/user.zip
         dest: /app
         remote_src: yes
 
     - name : installing npm dependecies
-      ansible.builtin.command:  
-        cmd: npm install
+      ansible.builtin.command:  npm install
       args :
         chdir : /app
 
     
 
-    - name: setting up systemd that is user service
+    - name: copy user servive
       ansible.builtin.copy:
         src : user.service
         dest: /etc/systemd/system/user.service
@@ -62,7 +65,7 @@
         daemon_reload: true
 
 
-    - name :  setup MongoDB repo 
+    - name :  setup/copy MongoDB repo 
       ansible.builtin.copy:
         src : mongodb.repo
         dest: /etc/yum.repos.d/mongodb.repo
