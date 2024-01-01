@@ -68,13 +68,13 @@
         state: present
 
 
-    - name : get the cities count present in city.service file
-      ansible.builtin.command:  mysql -h mysql.arundev.online --quiet --eval 'db = db.getSiblingDB("cities"); db.cities.count()'
-      register : city_count  
+    # - name : get the cities count present in city.service file
+    #   ansible.builtin.command:  mysql -h mysql.arundev.online --quiet --eval 'db = db.getSiblingDB("cities"); db.cities.count()'
+    #   register : city_count  
 
 
 
-    - name : get the cities count present in city.service file
+    - name : check the cities count present inshipping 
       ansible.builtin.command:  mysql -h mysql.arundev.online -uroot -p{{mysql_password}} -SN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME='cities'"
       register : schema
 
