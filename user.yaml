@@ -86,7 +86,7 @@
 
     - name : loading the data to the user
       ansible.builtin.command: mongo --host mongodb.daws76s.online < /app/schema/user.js        # mongo --host mongodb.arundev.online < /app/schema/catalogue.service
-      when : user_count.stdout == 0      #basically in terminal stdout shows the no of users present
+      when : user_count.stdout == "0"      #basically in terminal stdout shows the no of users present
 
     - name : restart and enable
       ansible.builtin.service:
