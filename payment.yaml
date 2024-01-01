@@ -32,7 +32,7 @@
 
   - name : unzipping the payment application
     ansible.builtin.unarchive:
-      src: /tmp/shipping.zip 
+      src: /tmp/payment.zip 
       dest: /app
       remote_src: yes
 
